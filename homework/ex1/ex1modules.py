@@ -9,10 +9,22 @@ def computeCost(X, y, theta):
 
     # ====================== YOUR CODE HERE ===================================
     # TODO: Compute the cost of a particular choice of theta
-    #
-
+    # Initialize
+    J = 0
+    theta = theta.copy() # theta will be initialized at ex1.py
+    # numpy explaination
+    # numpy.dot() this function returns the dot product of two arrays. For 2-D vectors, it is the equivalent to matrix multiplication
+    # np.subtract() this function perform the element wise subtraction
+    # np.square() this function perform the element wise square
+    predictions = X.dot(theta)
+    errors = np.subtract(predictions, y)
+    sqrErrors = np.square(errors) 
+    J = 1 / (2 * m) * np.sum(sqrErrors)
     # =========================================================================
     return J
+
+
+
 
 
 def gradientDescent(X, y, theta, alpha, num_iters):
@@ -29,13 +41,20 @@ def gradientDescent(X, y, theta, alpha, num_iters):
         # ====================== YOUR CODE HERE ======================
         # TODO: Perform a single gradient step on the parameter vector. 
         #
+        predictions = X.dot(theta)
+        errors = np.subtract(predictions, y)
+        sum_delta = (alpha / m) * X.transpose().dot(errors)
+        theta = theta - sum_delta
+
         
         # ============================================================
-
         # Save the cost J in every iteration    
         J_history[iter] = computeCost(X, y, theta)
 
     return [theta, J_history]
+
+
+
 
 
 def normalEqn(X, y):
@@ -45,6 +64,7 @@ def normalEqn(X, y):
     # ====================== YOUR CODE HERE ======================
     # TODO: Complete the code to compute the closed form solution
     #               to linear regression and put the result in theta.
-
+    theta = np.zeros((X.shape[1], 1))
+    theta = np.linalg.pinv(np.transpose(X).dot(X)).dot(np.transpose(X).dot(y))
     # ============================================================
     return theta

@@ -111,7 +111,7 @@ print('Loading data ...')
 # x1 refers to the size of the house (in square feet)
 # x2 refers to the number of bedrooms
 # y refers to the price of the house.
-x1, x2, y = np.loadtxt('ex1data2.txt', delimiter=',', unpack=True)
+x1, x2, y = np.loadtxt('homework\ex1\ex1data2.txt', delimiter=',', unpack=True)
 x = np.concatenate((np.matrix(x1), np.matrix(x2))).T
 y = np.matrix(y).T
 
