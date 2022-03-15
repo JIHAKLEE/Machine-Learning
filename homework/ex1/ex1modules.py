@@ -16,6 +16,9 @@ def computeCost(X, y, theta):
     # numpy.dot() this function returns the dot product of two arrays. For 2-D vectors, it is the equivalent to matrix multiplication
     # np.subtract() this function perform the element wise subtraction
     # np.square() this function perform the element wise square
+    # X = np.concatenate((np.ones((m, 1)), x), axis=1) # Add a column of ones to x
+    # theta = np.zeros((2, 1)) # initialize fitting parameters    
+
     predictions = X.dot(theta)
     errors = np.subtract(predictions, y)
     sqrErrors = np.square(errors) 
@@ -65,6 +68,7 @@ def normalEqn(X, y):
     # TODO: Complete the code to compute the closed form solution
     #               to linear regression and put the result in theta.
     theta = np.zeros((X.shape[1], 1))
-    theta = np.linalg.pinv(np.transpose(X).dot(X)).dot(np.transpose(X).dot(y))
+    theta = np.linalg.inv(np.transpose(X).dot(X)).dot(np.transpose(X).dot(y))
+
     # ============================================================
     return theta

@@ -19,6 +19,7 @@ data = np.loadtxt('homework\ex2\ex2data1.txt',delimiter=',')
 x = np.matrix(data[:, 0:2])
 y = np.matrix(data[:, 2:3])
 
+
 ## ==================== Part 1: Plotting ====================
 #  We start the exercise by plotting the positive and negative examples on a 2D plot.
 
@@ -42,6 +43,7 @@ plt.show()
 [m, n] = x.shape
 X = np.concatenate((np.ones((m, 1)), x), axis=1) # Add intercept term to x and X_test
 initial_theta = np.matrix(np.zeros((n + 1, 1))) # Initialize fitting parameters
+
 
 cost = logRegCost(initial_theta, X, y)
 grad = logRegGrad(initial_theta, X, y)

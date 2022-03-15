@@ -14,7 +14,7 @@ plt.ion()
 #  The first two columns contains the X values and the third column
 #  contains the label (y).
 
-data = np.loadtxt('ex2data2.txt',delimiter=',')
+data = np.loadtxt('homework\ex2\ex2data2.txt',delimiter=',')
 x = np.matrix(data[:, 0:2])
 y = np.matrix(data[:, 2:3])
 
@@ -71,6 +71,21 @@ print('\nCost at initial theta (np.zeros): {}'.format(cost.item()))
 #  How does the decision boundary change when you vary lambda? How does
 #  the training set accuracy vary?
 #
+########################################################################
+# TO DO
+
+#1
+regParam = 0
+#2
+#regParam = 1
+#3
+#regParam = 10
+#4
+#regParam = 100
+
+
+########################################################################
+
 
 Result = op.minimize(fun=logRegCost, x0=initial_theta, args=(X, y,regParam), method='TNC',jac=logRegGrad)
 theta = Result.x
