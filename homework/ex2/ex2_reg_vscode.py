@@ -14,7 +14,7 @@ plt.ion()
 #  The first two columns contains the X values and the third column
 #  contains the label (y).
 
-data = np.loadtxt('ex2data2.txt',delimiter=',')
+data = np.loadtxt('homework\ex2\ex2data2.txt',delimiter=',')
 x = np.matrix(data[:, 0:2])
 y = np.matrix(data[:, 2:3])
 
