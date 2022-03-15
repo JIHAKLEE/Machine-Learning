@@ -12,13 +12,6 @@ def sigmoid(z):
     return g
 
 
-#########################################################################
-
-
-
-
-##########################################################################
-
 
 def logRegCost(theta, X, y, regParam=0):
     # When this function is called via op.minimize function, the theta parameter is
@@ -99,6 +92,4 @@ def mapFeature(X1, X2):
     return out
 
 
-
-################################################################
 
