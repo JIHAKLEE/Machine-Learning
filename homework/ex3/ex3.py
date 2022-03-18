@@ -38,7 +38,7 @@ if sel.ndim == 1:
     sel = np.reshape(sel, (-1,sel.shape[0]))
 
 # Set example_width automatically if not passed in
-example_width = int(round(math.sqrt(sel.shape[1])))
+example_width = int(round(np.sqrt(sel.shape[1])))
 
 # Gray Image
 plt.set_cmap("gray")
@@ -48,8 +48,8 @@ m, n = sel.shape
 example_height = int(n / example_width)
 
 # Compute number of items to display
-display_rows = int(math.floor(math.sqrt(m)))
-display_cols = int(math.ceil(m / display_rows))
+display_rows = int(np.floor(np.sqrt(m)))
+display_cols = int(np.ceil(m / display_rows))
 
 # Between images padding
 pad = 1
