@@ -53,7 +53,7 @@ X = mapFeature(x[:,0], x[:,1])
 initial_theta = np.matrix(np.zeros((n, 1)))
 
 # Set regularization parameter lambda to 1
-regParam = 1
+regParam = 0
 
 # Compute and display initial cost and gradient for regularized logistic regression
 cost = logRegCost(initial_theta, X, y, regParam)
@@ -75,7 +75,7 @@ print('\nCost at initial theta (np.zeros): {}'.format(cost.item()))
 # TO DO
 
 #1
-regParam = 0
+reregParam = 0
 #2
 #regParam = 1
 #3
