@@ -4,7 +4,8 @@ import scipy.optimize as op
 def sigmoid(z):
     # ====================== YOUR CODE HERE ======================
     # Instructions: Compute the sigmoid of each value of z (z can be a matrix, vector or scalar).
-
+    g = np.zeros(z.size)
+    g = 1 / (1 + np.exp(-z))
     # =============================================================
     return g
 
@@ -18,7 +19,13 @@ def logRegCost(theta, X, y, regParam=0):
     # Instructions: Compute the cost of a particular choice of theta.
     #               You should set J to the cost.
     #
-
+    m = len(y)
+    hypothesis = sigmoid(np.dot(X,theta))
+    y_minus = - y
+    J = (1.0/m) * (((y_minus).transpose()).dot(np.log(hypothesis)) - (1.0 - y.transpose()).dot(np.log(1.0 - hypothesis)))
+    J = np.float64(J)
+    sum_theta = (theta[1:] @ theta[1:].T).sum()
+    J = J +regParam/(2*m)*sum_theta
     # =============================================================
 
     return J
@@ -33,6 +40,12 @@ def logRegGrad(theta, X, y, regParam=0):
     # Instructions: Compute the partial derivatives and set grad to the partial
     #               derivatives of the cost w.r.t. each parameter in theta
     #
+    m = len(y)
+    n = X.shape[1]
+    theta = theta.reshape((n,1))
+    hypothesis = sigmoid(np.dot(X,theta))
+    grad = (1.0/m)* (X.transpose().dot(hypothesis - y))
+    grad[1:,:] =grad[1:,:]+(regParam/m)*theta[1:,:]
 
     # =============================================================
 
@@ -56,8 +69,25 @@ def trainOneVsAll(X, y, num_labels, regParam=0):
     # stored in member variable x. Your task is to pack those label-wise values to
     # matrix all_theta.
 
+    (m, n) = X.shape
+    # You need to return the following variables correctly
+    all_theta = np.zeros((num_labels, n + 1))
+    # Add ones to the X data 2D-array
+    X = np.c_[np.ones(m), X]
+
+    for i in range(num_labels):
+        initial_theta = np.zeros((n + 1, 1))
+        myargs = (X, (y%10==i).astype(int), regParam)
+        theta = op.minimize(fun=logRegCost, x0=initial_theta, args=myargs, method = 'TNC', jac=logRegGrad)
+        print('Done')
+        all_theta[i,:] = theta["x"]
+
     # =========================================================================
     return all_theta
+
+
+
+    
 
 
 def predictOneVsAll(all_theta, X):
@@ -75,7 +105,6 @@ def predictOneVsAll(all_theta, X):
     # Add ones to the X data matrix
     X = np.concatenate( ( np.ones((m,1)), X ), axis = 1 )
 
-
     # ====================== YOUR CODE HERE ======================
     # Instructions: Complete the following code to make predictions using
     #               your learned logistic regression parameters (one-vs-all).
@@ -83,7 +112,11 @@ def predictOneVsAll(all_theta, X):
     #               ranging from 1 to num_labels.
     #               (e.g., predictions = [1; 3; 1; 2] predicts classes 1, 3, 1, 2 for 4 examples)
     #    
-
+    result = sigmoid(np.dot(all_theta, X.T))
+    result = np.roll(result, -1, axis=0)
+    result = np.vstack([np.zeros(m), result])
+    predictions = np.argmax(result, axis=0)
+    predictions = np.matrix(predictions).T
     # =========================================================================
 
     return predictions
