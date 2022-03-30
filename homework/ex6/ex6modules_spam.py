@@ -9,7 +9,7 @@ def processEmail(email_contents):
 
     # Load Vocabulary
     vocabList = {}
-    with open('vocab.txt', 'r') as vocabFile:
+    with open('homework\\ex6\\vocab.txt', 'r') as vocabFile:
         for line in vocabFile.readlines():
             i, word = line.split()
             vocabList[word] = int(i)
@@ -98,7 +98,13 @@ def processEmail(email_contents):
         # Note: You can use strcmp(str1, str2) to compare two strings (str1 and
         #       str2). It will return 1 only if the two strings are equivalent.
         #
+        idx = vocabList[token] if token in vocabList else 0
 
+        # only add entries which are in vocabList
+        #   i.e. those with ind ~= 0, 
+        #        given that ind is assigned 0 if str is not found in vocabList
+        if idx > 0:
+            word_indices.append(idx)
 
         # =============================================================
 
@@ -158,7 +164,10 @@ def emailFeatures(word_indices):
     #              x = [ 0 0 0 0 1 0 0 0 ... 0 0 0 0 1 ... 0 0 0 1 0 ..];
     #
     #
-
+    for idx in word_indices:
+    	# assign 1 to index idx in x
+    	x[idx] = 1
+    
     # =========================================================================
 
     return x
