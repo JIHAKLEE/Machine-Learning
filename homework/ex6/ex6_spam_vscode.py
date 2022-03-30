@@ -7,7 +7,7 @@
 import scipy.io
 import numpy as np
 import ex6utils
-import ex6modules_spam
+import ex6modules_spam_vscode
 
 
 def readFile(filename):

@@ -9,7 +9,7 @@ def processEmail(email_contents):
 
     # Load Vocabulary
     vocabList = {}
-    with open('vocab.txt', 'r') as vocabFile:
+    with open('homework\\ex6\\vocab.txt', 'r') as vocabFile:
         for line in vocabFile.readlines():
             i, word = line.split()
             vocabList[word] = int(i)
