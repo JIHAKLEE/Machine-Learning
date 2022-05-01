@@ -11,7 +11,8 @@ def computeCost(X, y, theta):
     # TODO: Compute the cost of a particular choice of theta
     # Initialize
     J = 0
-    theta = theta.copy() # theta will be initialized at ex1.py
+    theta = theta.copy()
+    
     # numpy explaination
     # numpy.dot() this function returns the dot product of two arrays. For 2-D vectors, it is the equivalent to matrix multiplication
     # np.subtract() this function perform the element wise subtraction

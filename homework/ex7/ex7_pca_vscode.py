@@ -20,6 +20,10 @@ print('Visualizing example dataset for PCA.\n')
 #  variable X in your environment
 mat = scipy.io.loadmat('homework\ex7\ex7data1.mat')
 X = np.array(mat["X"])
+print('input x values :')
+print(X)
+print(X[:,0])
+print(X[:,1])
 
 # interactive graphs
 plt.ion()
