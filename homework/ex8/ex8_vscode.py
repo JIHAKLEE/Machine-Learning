@@ -98,7 +98,7 @@ plt.show(block=False)
 
 #  Loads the second dataset. You should now have the
 #  variables X, Xval, yval in your environment
-mat = scipy.io.loadmat('machine learning\homework\ex8\ex8data2.mat')
+mat = scipy.io.loadmat('machine learning/homework/ex8/ex8data2.mat')
 X = mat["X"]
 Xval = mat["Xval"]
 yval = mat["yval"].flatten()
